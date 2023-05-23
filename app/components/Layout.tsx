@@ -60,6 +60,7 @@ export function Layout({
 function Header({title, menu}: {title: string; menu?: EnhancedMenu}) {
   const isHome = useIsHomePath();
 
+  console.log("hope it get's detected by sonar");
 
   const {
     isOpen: isCartOpen,
