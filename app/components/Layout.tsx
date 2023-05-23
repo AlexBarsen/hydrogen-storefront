@@ -45,7 +45,7 @@ export function Layout({
           </a>
         </div>
         <Header
-          title={layout?.shop.name ?? 'Hydrogen'}
+          title={layout?.shop.name ?? 'Hydrogen Store`}
           menu={layout?.headerMenu}
         />
         <main role="main" id="mainContent" className="flex-grow">
@@ -63,6 +63,7 @@ function Header({title, menu}: {title: string; menu?: EnhancedMenu}) {
   console.log('test');
   console.log('test2');
   console.log('test3');
+  console.log('test2');
 
   const {
     isOpen: isCartOpen,
