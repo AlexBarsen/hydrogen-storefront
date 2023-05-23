@@ -61,6 +61,7 @@ function Header({title, menu}: {title: string; menu?: EnhancedMenu}) {
   const isHome = useIsHomePath();
 
   console.log('test');
+  console.log('test2');
 
   const {
     isOpen: isCartOpen,
