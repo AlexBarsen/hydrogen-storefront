@@ -61,6 +61,7 @@ function Header({title, menu}: {title: string; menu?: EnhancedMenu}) {
   const isHome = useIsHomePath();
 
   console.log("hope it get's detected by sonar");
+  console.log('sadsad');
 
   const {
     isOpen: isCartOpen,
