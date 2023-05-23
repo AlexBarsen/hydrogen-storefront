@@ -62,6 +62,7 @@ function Header({title, menu}: {title: string; menu?: EnhancedMenu}) {
 
   console.log('test');
   console.log('test2');
+  console.log('test3');
 
   const {
     isOpen: isCartOpen,
