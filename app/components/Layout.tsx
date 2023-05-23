@@ -45,7 +45,7 @@ export function Layout({
           </a>
         </div>
         <Header
-          title={layout?.shop.name ?? 'Hydrogen Store`}
+          title={layout?.shop.name ?? 'Hydrogen Store'}
           menu={layout?.headerMenu}
         />
         <main role="main" id="mainContent" className="flex-grow">
@@ -60,7 +60,7 @@ export function Layout({
 function Header({title, menu}: {title: string; menu?: EnhancedMenu}) {
   const isHome = useIsHomePath();
 
-  console.log("SONAR TEST");
+  console.log('SONAR TEST');
 
   const {
     isOpen: isCartOpen,
