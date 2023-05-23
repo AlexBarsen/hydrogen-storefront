@@ -45,7 +45,7 @@ export function Layout({
           </a>
         </div>
         <Header
-          title={layout?.shop.name ?? 'Hydrogen'}
+          title={layout?.shop.name ?? 'Hydrogen Store`}
           menu={layout?.headerMenu}
         />
         <main role="main" id="mainContent" className="flex-grow">
