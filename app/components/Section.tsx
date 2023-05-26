@@ -1,5 +1,5 @@
 import {Container, Typography} from '@mui/material';
-import React, {Children, HtmlHTMLAttributes} from 'react';
+import React from 'react';
 
 interface SectionProps {
   title: string;
