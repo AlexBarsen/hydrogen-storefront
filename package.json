@@ -17,7 +17,11 @@
   ],
   "prettier": "@shopify/prettier-config",
   "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
     "@headlessui/react": "^1.7.2",
+    "@mui/material": "^5.13.2",
+    "@mui/styled-engine-sc": "^5.12.0",
     "@remix-run/react": "1.15.0",
     "@shopify/cli": "3.45.0",
     "@shopify/cli-hydrogen": "^4.1.2",
@@ -33,6 +37,7 @@
     "react-intersection-observer": "^9.4.1",
     "react-use": "^17.4.0",
     "schema-dts": "^1.1.0",
+    "styled-components": "^6.0.0-rc.2",
     "tiny-invariant": "^1.2.0",
     "typographic-base": "^1.0.4",
     "worktop": "^0.7.3"
