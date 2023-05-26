@@ -1,5 +1,7 @@
+import {Grid, Container} from '@mui/material';
 import type {Product} from '@shopify/hydrogen/storefront-api-types';
-import {ProductCard, Section} from '~/components';
+import {ProductCard} from '~/components';
+import Section from './Section';
 
 const mockProducts = new Array(12).fill('');
 
@@ -7,23 +9,20 @@ export function ProductSwimlane({
   title = 'Featured Products',
   products = mockProducts,
   count = 12,
-  ...props
 }: {
   title?: string;
   products?: Product[];
   count?: number;
 }) {
   return (
-    <Section heading={title} padding="y" {...props}>
-      <div className="swimlane hiddenScroll md:pb-8 md:scroll-px-8 lg:scroll-px-12 md:px-8 lg:px-12">
+    <Section title={title}>
+      <Grid container columns={5} spacing={3} gridAutoRows="1fr">
         {products.map((product) => (
-          <ProductCard
-            product={product}
-            key={product.id}
-            className="snap-start w-80"
-          />
+          <Grid item xs={1} key={product.id}>
+            <ProductCard product={product} />
+          </Grid>
         ))}
-      </div>
+      </Grid>
     </Section>
   );
 }
