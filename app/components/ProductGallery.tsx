@@ -23,15 +23,6 @@ export function ProductGallery({
         const isFourth = i === 3;
         const isFullWidth = i % 3 === 0;
 
-        const data = {
-          ...med,
-          image: {
-            // @ts-ignore
-            ...med.image,
-            altText: med.alt || 'Product image',
-          },
-        };
-
         const style = [
           isFullWidth ? 'md:col-span-2' : 'md:col-span-1',
           isFirst || isFourth ? '' : 'md:aspect-[4/5]',
