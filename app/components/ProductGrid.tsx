@@ -1,4 +1,5 @@
-import {Button, Grid, ProductCard, Link} from '~/components';
+import {Button, Grid, Link} from '~/components';
+import ProductCard from './ProductCard';
 import {getImageLoadingPriority} from '~/lib/const';
 import type {Collection, Product} from '@shopify/hydrogen/storefront-api-types';
 import {useFetcher} from '@remix-run/react';
@@ -67,7 +68,7 @@ export function ProductGrid({
           <ProductCard
             key={product.id}
             product={product}
-            loading={getImageLoadingPriority(i)}
+            // loading={getImageLoadingPriority(i)}
           />
         ))}
       </Grid>

@@ -8,12 +8,12 @@ import invariant from 'tiny-invariant';
 import {
   PageHeader,
   Section,
-  ProductCard,
   Grid,
   Pagination,
   getPaginationVariables,
   Button,
 } from '~/components';
+import ProductCard from '~/components/ProductCard';
 import {PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {getImageLoadingPriority} from '~/lib/const';
 import {seoPayload} from '~/lib/seo.server';

@@ -2,7 +2,7 @@ import {Image} from '@shopify/hydrogen';
 import type {Collection} from '@shopify/hydrogen/storefront-api-types';
 import {Heading, Section, Grid, Link} from '~/components';
 
-export function FeaturedCollections({
+const FeaturedCollections = ({
   collections,
   title = 'Collections',
   ...props
@@ -10,7 +10,7 @@ export function FeaturedCollections({
   collections: Collection[];
   title?: string;
   [key: string]: any;
-}) {
+}) => {
   const haveCollections = collections && collections.length > 0;
   if (!haveCollections) return null;
 
@@ -44,4 +44,6 @@ export function FeaturedCollections({
       </Grid>
     </Section>
   );
-}
+};
+
+export default FeaturedCollections;

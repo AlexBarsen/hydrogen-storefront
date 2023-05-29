@@ -32,7 +32,7 @@ export function ProductGallery({
             ...med.image,
             altText: med.alt || 'Product image',
           },
-        } as MediaImage;
+        };
 
         const style = [
           isFullWidth ? 'md:col-span-2' : 'md:col-span-1',
@@ -46,7 +46,7 @@ export function ProductGallery({
             // @ts-ignore
             key={med.id || med.image.id}
           >
-            {(med as MediaImage).image && (
+            {/* {med.image && (
               <Image
                 loading={i === 0 ? 'eager' : 'lazy'}
                 data={data.image!}
@@ -58,7 +58,7 @@ export function ProductGallery({
                 }
                 className="object-cover w-full h-full aspect-square fadeIn"
               />
-            )}
+            )} */}
           </div>
         );
       })}

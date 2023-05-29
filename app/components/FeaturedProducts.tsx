@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import {useEffect, useId, useMemo} from 'react';
 import {useFetcher} from '@remix-run/react';
-import {Heading, ProductCard, Skeleton, Text} from '~/components';
+import {Heading, Skeleton, Text} from '~/components';
+import ProductCard from './ProductCard';
 import type {
   Product,
   ProductSortKeys,
@@ -68,7 +69,7 @@ export function FeaturedProducts({
         <FeatureProductsContent
           count={count}
           onClick={onClose}
-          products={data?.products as Product[]}
+          products={data?.products}
         />
       </div>
     </>
@@ -109,12 +110,7 @@ function FeatureProductsContent({
   return (
     <>
       {products.map((product) => (
-        <ProductCard
-          product={product}
-          key={product.id}
-          onClick={onClick}
-          quickAdd
-        />
+        <ProductCard product={product} key={product.id} onClick={onClick} />
       ))}
     </>
   );

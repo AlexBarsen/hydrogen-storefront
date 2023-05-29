@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import {flattenConnection} from '@shopify/hydrogen';
-import {Link} from '~/components';
 import {getProductPlaceholder} from '~/lib/placeholders';
 import type {Product} from '@shopify/hydrogen/storefront-api-types';
 import Card from '@mui/material/Card';
@@ -11,21 +10,27 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import {Container, Paper} from '@mui/material';
+import {Link} from '@remix-run/react';
 
-export function ProductCard({
+const ProductCard = ({
   product,
   onClick,
 }: {
   product: Product;
   onClick?: () => void;
-}) {
+}) => {
   const cardProduct: Product = product?.variants
     ? (product as Product)
     : getProductPlaceholder();
   if (!cardProduct?.variants?.nodes?.length) return null;
 
+  console.log('cardProduct', cardProduct);
   const firstVariant = flattenConnection(cardProduct.variants)[0];
+  console.log('firstVariant', firstVariant);
   const {image, price} = firstVariant;
+  console.log('image', image);
+  console.log('priceAmount', price.amount);
+  console.log('priceCurrencyCode', price.currencyCode);
 
   return (
     <Link
@@ -45,7 +50,7 @@ export function ProductCard({
                 }}
                 component="img"
                 image={image.url}
-                title="green iguana"
+                title={product.title}
               />
             </Container>
           )}
@@ -64,4 +69,6 @@ export function ProductCard({
       </Paper>
     </Link>
   );
-}
+};
+
+export default ProductCard;

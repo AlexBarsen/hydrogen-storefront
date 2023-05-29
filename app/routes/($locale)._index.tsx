@@ -1,9 +1,10 @@
 import {defer, type LoaderArgs} from '@shopify/remix-oxygen';
 import {Suspense} from 'react';
 import {Await, useLoaderData} from '@remix-run/react';
-import {ProductSwimlane, FeaturedCollections, Hero} from '~/components';
+import {Hero} from '~/components';
 import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {getHeroPlaceholder} from '~/lib/placeholders';
+import FeaturedCollections from '~/components/FeaturedCollections';
 import {seoPayload} from '~/lib/seo.server';
 import type {
   CollectionConnection,
@@ -12,6 +13,7 @@ import type {
 import {AnalyticsPageType} from '@shopify/hydrogen';
 import {routeHeaders, CACHE_SHORT} from '~/data/cache';
 import {type CollectionHero} from '~/components/Hero';
+import FeaturedSection from '~/components/FeaturedSection';
 
 interface HomeSeoData {
   shop: {
@@ -126,13 +128,7 @@ export default function Homepage() {
           <Await resolve={featuredProducts}>
             {({products}) => {
               if (!products?.nodes) return <></>;
-              return (
-                <ProductSwimlane
-                  products={products.nodes}
-                  title="Featured Products"
-                  count={4}
-                />
-              );
+              return <FeaturedSection />;
             }}
           </Await>
         </Suspense>
