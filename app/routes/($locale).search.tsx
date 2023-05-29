@@ -8,7 +8,6 @@ import {Await, Form, useLoaderData} from '@remix-run/react';
 import type {
   Collection,
   CollectionConnection,
-  Product,
   ProductConnection,
 } from '@shopify/hydrogen/storefront-api-types';
 import {Suspense} from 'react';

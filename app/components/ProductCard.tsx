@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import {flattenConnection} from '@shopify/hydrogen';
 import {getProductPlaceholder} from '~/lib/placeholders';
 import type {Product} from '@shopify/hydrogen/storefront-api-types';
@@ -24,13 +23,8 @@ const ProductCard = ({
     : getProductPlaceholder();
   if (!cardProduct?.variants?.nodes?.length) return null;
 
-  console.log('cardProduct', cardProduct);
   const firstVariant = flattenConnection(cardProduct.variants)[0];
-  console.log('firstVariant', firstVariant);
   const {image, price} = firstVariant;
-  console.log('image', image);
-  console.log('priceAmount', price.amount);
-  console.log('priceCurrencyCode', price.currencyCode);
 
   return (
     <Link

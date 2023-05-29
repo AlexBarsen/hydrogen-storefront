@@ -1,6 +1,6 @@
 import {render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
-import FeaturedSection from '../components/FeaturedSection';
+import FeaturedSection from '../app/components/FeaturedSection';
 import {flattenConnection} from '@shopify/hydrogen';
 import {useFetcher, useMatches} from '@remix-run/react';
 import React from 'react';
@@ -98,8 +98,7 @@ describe('FeaturedSection components test', () => {
       {path: '/about', name: 'about'},
     ]);
 
-    const {debug} = render(<FeaturedSection />);
-    debug();
+    render(<FeaturedSection />);
     expect(mockLoad).toHaveBeenCalledWith('/featured-products');
     expect(screen.getByText('Featured Products')).toBeInTheDocument();
     expect(screen.getByRole('link')).toHaveAttribute(
