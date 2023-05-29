@@ -21,7 +21,6 @@ import {
   IconCheck,
   IconClose,
   ProductGallery,
-  ProductSwimlane,
   Section,
   Skeleton,
   Text,
@@ -44,6 +43,7 @@ import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import type {Storefront} from '~/lib/type';
 import type {Product} from 'schema-dts';
 import {routeHeaders, CACHE_SHORT} from '~/data/cache';
+import FeaturedSection from '~/components/FeaturedSection';
 
 export const headers = routeHeaders;
 
@@ -170,9 +170,7 @@ export default function Product() {
           errorElement="There was a problem loading related products"
           resolve={recommended}
         >
-          {(products) => (
-            <ProductSwimlane title="Related Products" products={products} />
-          )}
+          <FeaturedSection />
         </Await>
       </Suspense>
     </>

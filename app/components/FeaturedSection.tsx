@@ -1,16 +1,17 @@
 import {useEffect} from 'react';
 import {useFetcher} from '@remix-run/react';
-import type {Collection, Product} from '@shopify/hydrogen/storefront-api-types';
-import {FeaturedCollections} from './FeaturedCollections';
-import {ProductSwimlane} from './ProductSwimlane';
 import {usePrefixPathWithLocale} from '~/lib/utils';
+import Section from './Section';
+import ProductCard from './ProductCard';
+import {Grid} from '@mui/material';
+import {Product} from '@shopify/hydrogen-react/storefront-api-types';
 
 export interface FeaturedData {
-  featuredCollections: Collection[];
-  featuredProducts: Product[];
+  featuredCollections: any[];
+  featuredProducts: any[];
 }
 
-export function FeaturedSection() {
+const FeaturedSection = () => {
   const {load, data} = useFetcher();
   const path = usePrefixPathWithLocale('/featured-products');
 
@@ -20,17 +21,22 @@ export function FeaturedSection() {
 
   if (!data) return null;
 
-  const {featuredCollections, featuredProducts} = data as FeaturedData;
+  const {featuredProducts} = data;
 
+  console.log('featuredProducts', featuredProducts);
   return (
     <>
-      {featuredCollections.length < 2 && (
-        <FeaturedCollections
-          title="Popular Collections"
-          collections={featuredCollections}
-        />
-      )}
-      <ProductSwimlane products={featuredProducts} />
+      <Section title={'Featured Products'}>
+        <Grid container columns={5} spacing={3} gridAutoRows="1fr">
+          {featuredProducts.map((product: Product) => (
+            <Grid item xs={1} key={product.id}>
+              <ProductCard product={product} />
+            </Grid>
+          ))}
+        </Grid>
+      </Section>
     </>
   );
-}
+};
+
+export default FeaturedSection;

@@ -8,7 +8,6 @@ import {Await, Form, useLoaderData} from '@remix-run/react';
 import type {
   Collection,
   CollectionConnection,
-  Product,
   ProductConnection,
 } from '@shopify/hydrogen/storefront-api-types';
 import {Suspense} from 'react';
@@ -18,14 +17,14 @@ import {
   Input,
   PageHeader,
   ProductGrid,
-  ProductSwimlane,
-  FeaturedCollections,
   Section,
   Text,
 } from '~/components';
+import FeaturedCollections from '~/components/FeaturedCollections';
 import {PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {PAGINATION_SIZE} from '~/lib/const';
 import {seoPayload} from '~/lib/seo.server';
+import FeaturedSection from '~/components/FeaturedSection';
 
 export async function loader({request, context: {storefront}}: LoaderArgs) {
   const searchParams = new URL(request.url).searchParams;
@@ -124,12 +123,7 @@ export default function Search() {
                       data!.featuredCollections as SerializeFrom<Collection[]>
                     }
                   />
-                  <ProductSwimlane
-                    title="Trending Products"
-                    products={
-                      data!.featuredProducts as SerializeFrom<Product[]>
-                    }
-                  />
+                  <FeaturedSection />
                 </>
               )}
             </Await>

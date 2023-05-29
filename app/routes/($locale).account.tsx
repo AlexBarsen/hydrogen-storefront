@@ -21,9 +21,8 @@ import {
   AccountDetails,
   AccountAddressBook,
   Modal,
-  ProductSwimlane,
 } from '~/components';
-import {FeaturedCollections} from '~/components/FeaturedCollections';
+import FeaturedCollections from '~/components/FeaturedCollections';
 import {
   json,
   defer,
@@ -36,6 +35,7 @@ import {getFeaturedData} from './($locale).featured-products';
 import {doLogout} from './($locale).account.logout';
 import {usePrefixPathWithLocale} from '~/lib/utils';
 import {CACHE_NONE, routeHeaders} from '~/data/cache';
+import FeaturedSection from '~/components/FeaturedSection';
 
 // Combining json + Response + defer in a loader breaks the
 // types returned by useLoaderData. This is a temporary fix.
@@ -162,7 +162,8 @@ function Account({
                   title="Popular Collections"
                   collections={data.featuredCollections as Collection[]}
                 />
-                <ProductSwimlane products={data.featuredProducts} />
+
+                <FeaturedSection />
               </>
             )}
           </Await>

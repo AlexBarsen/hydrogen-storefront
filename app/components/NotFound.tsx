@@ -1,5 +1,5 @@
 import {Button} from './Button';
-import {FeaturedSection} from './FeaturedSection';
+import FeaturedSection from './FeaturedSection';
 import {PageHeader, Text} from './Text';
 
 export function NotFound({type = 'page'}: {type?: string}) {
