@@ -232,9 +232,9 @@ const COLLECTION_HERO_QUERY = `#graphql
 export const HOMEPAGE_FEATURED_PRODUCTS_QUERY = `#graphql
   query homepageFeaturedProducts($country: CountryCode, $language: LanguageCode)
   @inContext(country: $country, language: $language) {
-    products(first: 8) {
+    products(first: 1) {
       nodes {
-        ...ProductCard
+        ...ProductCard,
       }
     }
   }
@@ -246,7 +246,7 @@ export const FEATURED_COLLECTIONS_QUERY = `#graphql
   query homepageFeaturedCollections($country: CountryCode, $language: LanguageCode)
   @inContext(country: $country, language: $language) {
     collections(
-      first: 4,
+      first: 12
       sortKey: UPDATED_AT
     ) {
       nodes {
