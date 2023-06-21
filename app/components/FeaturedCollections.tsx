@@ -16,8 +16,6 @@ const FeaturedCollections = ({
   const haveCollections = collections && collections.length > 0;
   if (!haveCollections) return null;
 
-  const items = collections.filter((item) => item.image).length;
-
   return (
     <Section title="Collections" {...props}>
       <Grid container columns={5} spacing={3} gridAutoRows="1fr">
