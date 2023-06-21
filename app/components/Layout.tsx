@@ -60,8 +60,6 @@ export function Layout({
 function Header({title, menu}: {title: string; menu?: EnhancedMenu}) {
   const isHome = useIsHomePath();
 
-  console.log('FINAL TEST');
-
   const {
     isOpen: isCartOpen,
     openDrawer: openCart,

@@ -28,7 +28,7 @@ jest.mock('@remix-run/react', () => ({
   useMatches: jest.fn(),
 }));
 
-describe('FeaturedSection components test', () => {
+describe('FeaturedSection component test', () => {
   it('Should render the component correctly', () => {
     // const flattenCnnectionMock = flattenConnection as jest.Mock;
     const flattenedVariants = [
