@@ -7,16 +7,18 @@ import type {
 } from '@shopify/hydrogen/storefront-api-types';
 import {flattenConnection, AnalyticsPageType} from '@shopify/hydrogen';
 import invariant from 'tiny-invariant';
-import {PageHeader, Section, Text, SortFilter} from '~/components';
+import {SortFilter} from '~/components';
 import {ProductGrid} from '~/components/ProductGrid';
 import {PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {CACHE_SHORT, routeHeaders} from '~/data/cache';
 import {seoPayload} from '~/lib/seo.server';
 import type {AppliedFilter, SortParam} from '~/components/SortFilter';
+import PageHeader from '~/components/PageHeader';
+import {Container} from '@mui/material';
 
 export const headers = routeHeaders;
 
-const PAGINATION_SIZE = 48;
+const PAGINATION_SIZE = 8;
 
 type VariantFilterParam = Record<string, string | boolean>;
 type PriceFiltersQueryParam = Record<'price', {max?: number; min?: number}>;
@@ -135,20 +137,13 @@ export default function Collection() {
   const {collection, collections, appliedFilters} =
     useLoaderData<typeof loader>();
 
+  console.log(collection);
+
   return (
     <>
-      <PageHeader heading={collection.title}>
-        {collection?.description && (
-          <div className="flex items-baseline justify-between w-full">
-            <div>
-              <Text format width="narrow" as="p" className="inline-block">
-                {collection.description}
-              </Text>
-            </div>
-          </div>
-        )}
-      </PageHeader>
-      <Section>
+      <PageHeader title={collection.title} imageUrl={collection?.image?.url} />
+
+      <Container>
         <SortFilter
           filters={collection.products.filters as Filter[]}
           appliedFilters={appliedFilters}
@@ -161,7 +156,7 @@ export default function Collection() {
             data-test="product-grid"
           />
         </SortFilter>
-      </Section>
+      </Container>
     </>
   );
 }

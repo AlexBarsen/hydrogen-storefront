@@ -1,17 +1,16 @@
-import {Button, Grid, Link} from '~/components';
 import ProductCard from './ProductCard';
 import type {Collection, Product} from '@shopify/hydrogen/storefront-api-types';
-import {useFetcher} from '@remix-run/react';
+import {useFetcher, Link} from '@remix-run/react';
 import {useEffect, useState} from 'react';
+import {Grid, Button} from '@mui/material';
 
-export function ProductGrid({
+const ProductGrid = ({
   url,
   collection,
-  ...props
 }: {
   url: string;
   collection: Collection;
-}) {
+}) => {
   const [initialProducts, setInitialProducts] = useState(
     collection?.products?.nodes || [],
   );
@@ -23,6 +22,8 @@ export function ProductGrid({
     collection?.products?.pageInfo?.endCursor,
   );
   const [products, setProducts] = useState(initialProducts);
+
+  console.log(collection);
 
   // props have changes, reset component state
   const productProps = collection?.products?.nodes || [];
@@ -62,9 +63,11 @@ export function ProductGrid({
 
   return (
     <>
-      <Grid layout="products" {...props}>
+      <Grid container columns={4} spacing={3} gridAutoRows="1fr">
         {products.map((product, i) => (
-          <ProductCard key={product.id} product={product} />
+          <Grid item xs={1} key={product.id}>
+            <ProductCard product={product} />
+          </Grid>
         ))}
       </Grid>
 
@@ -72,10 +75,8 @@ export function ProductGrid({
         <div className="flex items-center justify-center mt-6">
           <Button
             disabled={fetcher.state !== 'idle'}
-            variant="secondary"
+            variant="contained"
             onClick={fetchMoreProducts}
-            width="full"
-            prefetch="intent"
           >
             {fetcher.state !== 'idle' ? 'Loading...' : 'Load more products'}
           </Button>
@@ -83,4 +84,6 @@ export function ProductGrid({
       )}
     </>
   );
-}
+};
+
+export default ProductGrid;
