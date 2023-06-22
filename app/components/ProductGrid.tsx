@@ -4,13 +4,13 @@ import {useFetcher, Link} from '@remix-run/react';
 import {useEffect, useState} from 'react';
 import {Grid, Button} from '@mui/material';
 
-export function ProductGrid({
+const ProductGrid = ({
   url,
   collection,
 }: {
   url: string;
   collection: Collection;
-}) {
+}) => {
   const [initialProducts, setInitialProducts] = useState(
     collection?.products?.nodes || [],
   );
@@ -84,4 +84,6 @@ export function ProductGrid({
       )}
     </>
   );
-}
+};
+
+export default ProductGrid;

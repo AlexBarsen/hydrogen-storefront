@@ -1,11 +1,9 @@
 import {render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import FeaturedCollections from '~/components/FeaturedCollections';
-import {flattenConnection} from '@shopify/hydrogen';
-import {useFetcher, useMatches} from '@remix-run/react';
 import React from 'react';
 import {Collection} from '@shopify/hydrogen-react/storefront-api-types';
-import {BrowserRouter, MemoryRouter} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 
 const mockCollections: Collection[] = [
   {
@@ -61,7 +59,7 @@ const mockCollections: Collection[] = [
 ];
 
 describe('FeautredCollections component test', () => {
-  it('SHould render component correctly', () => {
+  it('Should render component correctly', () => {
     render(
       <FeaturedCollections collections={mockCollections} title="Collections" />,
       {wrapper: BrowserRouter},

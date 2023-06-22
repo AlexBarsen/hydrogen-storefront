@@ -1,6 +1,6 @@
 import {render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
-import FeaturedSection from '../app/components/FeaturedSection';
+import FeaturedSection from '../../app/components/FeaturedSection';
 import {flattenConnection} from '@shopify/hydrogen';
 import {useFetcher, useMatches} from '@remix-run/react';
 import React from 'react';
