@@ -23,8 +23,6 @@ const FeaturedSection = () => {
 
   const {featuredProducts} = data;
 
-  console.log(featuredProducts);
-
   return (
     <>
       <Section title={'Featured Products'}>

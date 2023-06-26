@@ -20,7 +20,6 @@ import {
   IconCaret,
   IconCheck,
   IconClose,
-  ProductGallery,
   Section,
   Skeleton,
   Text,
@@ -44,6 +43,10 @@ import type {Storefront} from '~/lib/type';
 import type {Product} from 'schema-dts';
 import {routeHeaders, CACHE_SHORT} from '~/data/cache';
 import FeaturedSection from '~/components/FeaturedSection';
+import ProductGallery from '~/components/ProductGallery';
+import {Box, Container} from '@mui/material';
+import {useState} from 'react';
+import ImageModal from '~/components/ImageModal';
 
 export const headers = routeHeaders;
 
@@ -122,12 +125,12 @@ export default function Product() {
 
   return (
     <>
-      <Section className="px-0 md:px-8 lg:px-12">
-        <div className="grid items-start md:gap-6 lg:gap-20 md:grid-cols-2 lg:grid-cols-3">
-          <ProductGallery
-            media={media.nodes}
-            className="w-full lg:col-span-2"
-          />
+      <Container maxWidth="lg" sx={{padding: ''}}>
+        <Box
+          sx={{display: 'flex', width: '100%', justifyContent: 'space-evenly'}}
+        >
+          <ProductGallery media={media.nodes} />
+
           <div className="sticky md:-mb-nav md:top-nav md:-translate-y-nav md:h-screen md:pt-nav hiddenScroll md:overflow-y-scroll">
             <section className="flex flex-col w-full max-w-xl gap-8 p-6 md:mx-auto md:max-w-sm md:px-0">
               <div className="grid gap-2">
@@ -163,8 +166,9 @@ export default function Product() {
               </div>
             </section>
           </div>
-        </div>
-      </Section>
+        </Box>
+      </Container>
+
       <Suspense fallback={<Skeleton className="h-32" />}>
         <Await
           errorElement="There was a problem loading related products"

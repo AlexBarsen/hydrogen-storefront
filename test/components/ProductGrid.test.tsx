@@ -35,38 +35,6 @@ const mockCollection: Collection = {
   updatedAt: '1',
 };
 
-const testMock = {
-  products: [
-    {
-      id: 'test_ID',
-      handle: 'test_HANDLE',
-      title: 'test_TITLE',
-      variants: {
-        nodes: [
-          {
-            image: {
-              url: 'test_URL',
-              altText: null,
-              height: 560,
-              width: 635,
-            },
-            price: {
-              amount: '20',
-              currency: 'RON',
-            },
-          },
-        ],
-      },
-    },
-  ],
-  featuredCollections: [
-    {
-      id: 'test_ID',
-      title: 'test_TITLE',
-    },
-  ],
-};
-
 const mockLoad = jest.fn();
 
 describe('FeautredCollections component test', () => {
