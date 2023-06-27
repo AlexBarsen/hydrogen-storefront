@@ -12,7 +12,6 @@ const FeaturedCollections = ({
   title?: string;
   [key: string]: any;
 }) => {
-  console.log(collections);
   const haveCollections = collections && collections.length > 0;
   if (!haveCollections) return null;
 

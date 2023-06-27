@@ -21,111 +21,6 @@ import ProductGallery from '~/components/ProductGallery';
 import {Box, Container, Typography} from '@mui/material';
 import ProductForm from '~/components/ProductForm';
 
-export const headers = routeHeaders;
-
-export async function loader({params, request, context}: LoaderArgs) {
-  const {productHandle} = params;
-  invariant(productHandle, 'Missing productHandle param, check route filename');
-
-  const searchParams = new URL(request.url).searchParams;
-
-  const selectedOptions: SelectedOptionInput[] = [];
-  searchParams.forEach((value, name) => {
-    selectedOptions.push({name, value});
-  });
-
-  const {shop, product} = await context.storefront.query<{
-    product: ProductType & {selectedVariant?: ProductVariant};
-    shop: Shop;
-  }>(PRODUCT_QUERY, {
-    variables: {
-      handle: productHandle,
-      selectedOptions,
-      country: context.storefront.i18n.country,
-      language: context.storefront.i18n.language,
-    },
-  });
-
-  if (!product?.id) {
-    throw new Response('product', {status: 404});
-  }
-
-  const recommended = getRecommendedProducts(context.storefront, product.id);
-  const firstVariant = product.variants.nodes[0];
-  const selectedVariant = product.selectedVariant ?? firstVariant;
-
-  const productAnalytics: ShopifyAnalyticsProduct = {
-    productGid: product.id,
-    variantGid: selectedVariant.id,
-    name: product.title,
-    variantName: selectedVariant.title,
-    brand: product.vendor,
-    price: selectedVariant.price.amount,
-  };
-
-  const seo = seoPayload.product({
-    product,
-    selectedVariant,
-    url: request.url,
-  });
-
-  return defer(
-    {
-      product,
-      shop,
-      storeDomain: shop.primaryDomain.url,
-      recommended,
-      analytics: {
-        pageType: AnalyticsPageType.product,
-        resourceId: product.id,
-        products: [productAnalytics],
-        totalValue: parseFloat(selectedVariant.price.amount),
-      },
-      seo,
-    },
-    {
-      headers: {
-        'Cache-Control': CACHE_SHORT,
-      },
-    },
-  );
-}
-
-const Product = () => {
-  const {product, shop, recommended} = useLoaderData<typeof loader>();
-  const {media, title, vendor} = product;
-
-  return (
-    <>
-      <Container maxWidth="lg" sx={{padding: ''}}>
-        <Box
-          sx={{display: 'flex', width: '100%', justifyContent: 'space-evenly'}}
-        >
-          <ProductGallery media={media.nodes} />
-
-          <Container title={title}>
-            <Box>
-              <Typography variant="h5">{title}</Typography>
-              {vendor && <Typography variant="h6">{vendor}</Typography>}
-            </Box>
-            <ProductForm />
-            <div className="grid gap-4 py-4"></div>
-          </Container>
-        </Box>
-      </Container>
-
-      <Suspense fallback={<Skeleton className="h-32" />}>
-        <Await
-          errorElement="There was a problem loading related products"
-          resolve={recommended}
-        >
-          <FeaturedSection />
-        </Await>
-      </Suspense>
-    </>
-  );
-};
-
 const PRODUCT_VARIANT_FRAGMENT = `#graphql
   fragment ProductVariantFragment on ProductVariant {
     id
@@ -264,5 +159,110 @@ async function getRecommendedProducts(
 
   return mergedProducts;
 }
+
+export const headers = routeHeaders;
+
+export async function loader({params, request, context}: LoaderArgs) {
+  const {productHandle} = params;
+  invariant(productHandle, 'Missing productHandle param, check route filename');
+
+  const searchParams = new URL(request.url).searchParams;
+
+  const selectedOptions: SelectedOptionInput[] = [];
+  searchParams.forEach((value, name) => {
+    selectedOptions.push({name, value});
+  });
+
+  const {shop, product} = await context.storefront.query<{
+    product: ProductType & {selectedVariant?: ProductVariant};
+    shop: Shop;
+  }>(PRODUCT_QUERY, {
+    variables: {
+      handle: productHandle,
+      selectedOptions,
+      country: context.storefront.i18n.country,
+      language: context.storefront.i18n.language,
+    },
+  });
+
+  if (!product?.id) {
+    throw new Response('product', {status: 404});
+  }
+
+  const recommended = getRecommendedProducts(context.storefront, product.id);
+  const firstVariant = product.variants.nodes[0];
+  const selectedVariant = product.selectedVariant ?? firstVariant;
+
+  const productAnalytics: ShopifyAnalyticsProduct = {
+    productGid: product.id,
+    variantGid: selectedVariant.id,
+    name: product.title,
+    variantName: selectedVariant.title,
+    brand: product.vendor,
+    price: selectedVariant.price.amount,
+  };
+
+  const seo = seoPayload.product({
+    product,
+    selectedVariant,
+    url: request.url,
+  });
+
+  return defer(
+    {
+      product,
+      shop,
+      storeDomain: shop.primaryDomain.url,
+      recommended,
+      analytics: {
+        pageType: AnalyticsPageType.product,
+        resourceId: product.id,
+        products: [productAnalytics],
+        totalValue: parseFloat(selectedVariant.price.amount),
+      },
+      seo,
+    },
+    {
+      headers: {
+        'Cache-Control': CACHE_SHORT,
+      },
+    },
+  );
+}
+
+const Product = () => {
+  const {product, recommended} = useLoaderData<typeof loader>();
+  const {media, title, vendor} = product;
+
+  return (
+    <>
+      <Container maxWidth="lg" sx={{padding: ''}}>
+        <Box
+          sx={{display: 'flex', width: '100%', justifyContent: 'space-evenly'}}
+        >
+          <ProductGallery media={media.nodes} />
+
+          <Container title={title}>
+            <Box>
+              <Typography variant="h5">{title}</Typography>
+              {vendor && <Typography variant="h6">{vendor}</Typography>}
+            </Box>
+            <ProductForm />
+            <div className="grid gap-4 py-4"></div>
+          </Container>
+        </Box>
+      </Container>
+
+      <Suspense fallback={<Skeleton className="h-32" />}>
+        <Await
+          errorElement="There was a problem loading related products"
+          resolve={recommended}
+        >
+          <FeaturedSection />
+        </Await>
+      </Suspense>
+    </>
+  );
+};
 
 export default Product;

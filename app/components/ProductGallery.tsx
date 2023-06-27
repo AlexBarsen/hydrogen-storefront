@@ -17,10 +17,6 @@ const PaperComponent = <C extends React.ElementType>(props: PaperProps<C>) => {
  * A client component that defines a media gallery for hosting images, 3D models, and videos of products
  */
 const ProductGallery = ({media}: {media: MediaEdge['node'][]}) => {
-  if (!media.length) {
-    return null;
-  }
-
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
   const rows = Math.round(media.length / 2);
@@ -31,6 +27,10 @@ const ProductGallery = ({media}: {media: MediaEdge['node'][]}) => {
     setOpen(true);
     setActiveIndex(index);
   };
+
+  if (!media.length) {
+    return null;
+  }
 
   return (
     <div style={{position: 'relative'}}>

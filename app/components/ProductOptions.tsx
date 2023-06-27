@@ -40,6 +40,7 @@ const ProductOptions = ({
             <FormControl sx={{m: 1, minWidth: 120}}>
               <InputLabel id={option.name + 'label'}>{option.name}</InputLabel>
               <Select
+                data-testid={option.name + '-select'}
                 name={option.name}
                 id={option.name}
                 value={option.name === 'Size' ? size : color}
@@ -55,6 +56,7 @@ const ProductOptions = ({
                   clonedSearchParams.set(option.name, value);
                   return (
                     <MenuItem
+                      data-testid="select-option"
                       key={`option-${option.name}-${value}`}
                       value={value}
                       onClick={() =>
