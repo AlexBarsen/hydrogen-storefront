@@ -65,20 +65,20 @@ const ImageModal = ({
     <Modal open={open} onClose={handleClose} className={classes.modalContainer}>
       <div className={classes.carouselContainer}>
         <img src={images[activeIndex]} className={classes.carouselImage} />
-        <ArrowBackIcon
-          onClick={handlePrevious}
-          className={classes.prevButton}
-          fontSize="large"
-        >
-          Previous
-        </ArrowBackIcon>
-        <ArrowForwardIcon
-          onClick={handleNext}
-          className={classes.nextButton}
-          fontSize="large"
-        >
-          Next
-        </ArrowForwardIcon>
+        <div data-testid="back">
+          <ArrowBackIcon
+            onClick={handlePrevious}
+            className={classes.prevButton}
+            fontSize="large"
+          />
+        </div>
+        <div data-testid="forward">
+          <ArrowForwardIcon
+            onClick={handleNext}
+            className={classes.nextButton}
+            fontSize="large"
+          />
+        </div>
       </div>
     </Modal>
   );
