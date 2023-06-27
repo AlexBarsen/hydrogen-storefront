@@ -8,7 +8,7 @@ import type {
 import {flattenConnection, AnalyticsPageType} from '@shopify/hydrogen';
 import invariant from 'tiny-invariant';
 import {SortFilter} from '~/components';
-import {ProductGrid} from '~/components/ProductGrid';
+import ProductGrid from '~/components/ProductGrid';
 import {PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {CACHE_SHORT, routeHeaders} from '~/data/cache';
 import {seoPayload} from '~/lib/seo.server';
@@ -136,8 +136,6 @@ export async function loader({params, request, context}: LoaderArgs) {
 export default function Collection() {
   const {collection, collections, appliedFilters} =
     useLoaderData<typeof loader>();
-
-  console.log(collection);
 
   return (
     <>

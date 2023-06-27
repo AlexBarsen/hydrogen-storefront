@@ -23,8 +23,6 @@ const ProductGrid = ({
   );
   const [products, setProducts] = useState(initialProducts);
 
-  console.log(collection);
-
   // props have changes, reset component state
   const productProps = collection?.products?.nodes || [];
   if (initialProducts !== productProps) {
