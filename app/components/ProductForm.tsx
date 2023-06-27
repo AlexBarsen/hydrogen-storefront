@@ -89,7 +89,7 @@ export async function loader({params, request, context}: LoaderArgs) {
 }
 
 const ProductForm = () => {
-  const {product, analytics, storeDomain} = useLoaderData<typeof loader>();
+  const {product, analytics} = useLoaderData<typeof loader>();
 
   const [currentSearchParams] = useSearchParams();
   const {location} = useNavigation();
@@ -156,7 +156,7 @@ const ProductForm = () => {
               <Typography>Add to Cart</Typography>
               <Money
                 withoutTrailingZeros
-                data={selectedVariant?.price!}
+                data={selectedVariant.price}
                 as="span"
               />
               {isOnSale && (
@@ -171,6 +171,7 @@ const ProductForm = () => {
           )}
         </div>
       )}
+      <span>Add product details etc.</span>
     </Container>
   );
 };

@@ -1,9 +1,7 @@
-import * as React from 'react';
 import Modal from '@mui/material/Modal';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {makeStyles} from '@mui/styles';
-import {useState} from 'react';
 
 const useStyles = makeStyles((theme) => ({
   modalContainer: {

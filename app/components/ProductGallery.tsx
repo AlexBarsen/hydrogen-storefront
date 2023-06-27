@@ -5,6 +5,14 @@ import {Paper, PaperProps} from '@mui/material';
 import ImageModal from './ImageModal';
 import {useState} from 'react';
 
+const PaperComponent = <C extends React.ElementType>(props: PaperProps<C>) => {
+  return (
+    <Paper elevation={8} sx={{height: '300px', width: '320px'}} square>
+      {props.children}
+    </Paper>
+  );
+};
+
 /**
  * A client component that defines a media gallery for hosting images, 3D models, and videos of products
  */
@@ -15,27 +23,14 @@ const ProductGallery = ({media}: {media: MediaEdge['node'][]}) => {
 
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
-  const [imageIndex, setImageIndex] = useState<number>(0);
   const rows = Math.round(media.length / 2);
-
-  const PaperComponent = <C extends React.ElementType>(
-    props: PaperProps<C>,
-  ) => {
-    return (
-      <Paper elevation={8} sx={{height: '300px', width: '320px'}} square>
-        {props.children}
-      </Paper>
-    );
-  };
-
   const [activeIndex, setActiveIndex] = useState(0);
+  const images = media.map((item) => item.image.url);
 
   const handleOpen = (index: any) => {
     setOpen(true);
     setActiveIndex(index);
   };
-
-  const images = media.map((item) => item.image.url);
 
   return (
     <div style={{position: 'relative'}}>

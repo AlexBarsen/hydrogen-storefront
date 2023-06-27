@@ -92,10 +92,8 @@ export async function loader({params, request, context}: LoaderArgs) {
 }
 
 const Product = () => {
-  const {product, shop, recommended, analytics} =
-    useLoaderData<typeof loader>();
-  const {media, title, vendor, descriptionHtml} = product;
-  const {shippingPolicy, refundPolicy} = shop;
+  const {product, shop, recommended} = useLoaderData<typeof loader>();
+  const {media, title, vendor} = product;
 
   return (
     <>
@@ -111,28 +109,7 @@ const Product = () => {
               {vendor && <Typography variant="h6">{vendor}</Typography>}
             </Box>
             <ProductForm />
-            <div className="grid gap-4 py-4">
-              {/* {descriptionHtml && (
-                <ProductDetail
-                  title="Product Details"
-                  content={descriptionHtml}
-                />
-              )}
-              {shippingPolicy?.body && (
-                <ProductDetail
-                  title="Shipping"
-                  content={getExcerpt(shippingPolicy.body)}
-                  learnMore={`/policies/${shippingPolicy.handle}`}
-                />
-              )}
-              {refundPolicy?.body && (
-                <ProductDetail
-                  title="Returns"
-                  content={getExcerpt(refundPolicy.body)}
-                  learnMore={`/policies/${refundPolicy.handle}`}
-                />
-              )} */}
-            </div>
+            <div className="grid gap-4 py-4"></div>
           </Container>
         </Box>
       </Container>
