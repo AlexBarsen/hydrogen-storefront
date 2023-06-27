@@ -1,4 +1,3 @@
-import type {MediaEdge} from '@shopify/hydrogen/storefront-api-types';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import {Paper, PaperProps} from '@mui/material';
@@ -16,12 +15,12 @@ const PaperComponent = <C extends React.ElementType>(props: PaperProps<C>) => {
 /**
  * A client component that defines a media gallery for hosting images, 3D models, and videos of products
  */
-const ProductGallery = ({media}: {media: MediaEdge['node'][]}) => {
+const ProductGallery = ({media}: {media: any}) => {
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
   const rows = Math.round(media.length / 2);
   const [activeIndex, setActiveIndex] = useState(0);
-  const images = media.map((item) => item.image.url);
+  const images = media.map((item: any) => item.image.url);
 
   const handleOpen = (index: any) => {
     setOpen(true);
@@ -47,13 +46,13 @@ const ProductGallery = ({media}: {media: MediaEdge['node'][]}) => {
         cols={2}
         rowHeight={200}
       >
-        {media.map((item, index) => {
+        {media.map((item: any, index: number) => {
           if ('image' in item)
             return (
               <ImageListItem key={item.id} component={PaperComponent}>
                 <img
                   src={item.image?.url}
-                  alt={'asd'}
+                  alt={'Product Photo ' + index}
                   loading="lazy"
                   style={{
                     objectFit: 'contain',
